@@ -23,7 +23,7 @@ jobs:
     name: 'publish release'
     runs-on: ubuntu-latest
     permissions:
-      contents: true
+      contents: write
       pull-requests: write
     needs: linting
     steps:
