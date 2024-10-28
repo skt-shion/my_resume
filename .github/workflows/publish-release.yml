@@ -39,7 +39,7 @@ jobs:
         run: npm run topdf
       - name: Draft release
         uses: softprops/action-gh-release@v2
-          with:
+        with:
           body: ${{ github.event.pull_request.title }}
           draft: true
           fail_on_unmatched_files: true
