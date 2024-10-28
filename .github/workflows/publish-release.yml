@@ -2,8 +2,7 @@ name: publish-release
 
 on:
   push:
-    branches: [main]
-    paths: ['docs/README.md']
+    tags: ['*']
   workflow_dispatch:
 
 jobs:
