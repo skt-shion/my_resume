@@ -1,0 +1,47 @@
+name: publish-release
+
+on:
+  pull_request:
+    branches: [main]
+    paths: ['docs/README.md']
+  workflow_dispatch:
+
+jobs:
+  linting:
+    name: linting
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+      - run: npm install
+      - run: npm run lint
+  release:
+    name: 'publish release'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: true
+      pull-requests: write
+    needs: linting
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+      - name: Install dependencies
+        run: apt-get update && apt-get install libnss3 libasound2-dev
+      - run: npm install
+      - name: Generate PDF
+        run: npm run topdf
+      - name: Draft release
+        uses: softprops/action-gh-release@v2
+          with:
+          body: ${{ github.event.pull_request.title }}
+          draft: true
+          fail_on_unmatched_files: true
+          files: docs/README.pdf
+          name: Release ${{ github.ref }}
