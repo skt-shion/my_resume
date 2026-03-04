@@ -8,7 +8,7 @@
   },
   "scripts": {
     "lint": "textlint .",
-    "topdf": "md-to-pdf docs/README.md --config-file ./md-to-pdf/config.js"
+    "topdf": "md-to-pdf docs/README.md --config-file ./md-to-pdf/config.js --launch-options '{ \"args\": [\"--no-sandbox\"] }'"
   },
   "repository": {
     "type": "git",
