@@ -2,12 +2,12 @@ name: publish-release
 
 on:
   push:
-    tags: ['*']
+    tags: ["*"]
   workflow_dispatch:
 
 jobs:
   release:
-    name: 'publish release'
+    name: "publish release"
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -17,9 +17,25 @@ jobs:
       - name: Convert Markdown to PDF
         uses: your-username/markdown-to-pdf-action@v2
         with:
+<<<<<<< HEAD
+          node-version: 24
+          cache: npm
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends fontconfig fonts-noto-cjk fonts-ipafont-gothic texlive-xetex texlive-lang-cjk pandoc
+      - name: Verify Japanese fonts
+        run: |
+          fc-list | grep -E "Noto Sans CJK JP|IPAexGothic|IPAGothic" || {
+            echo "Japanese font is not available on runner";
+            exit 1;
+          }
+      - run: npm ci
+      - name: Generate PDF
+        run: npm run pdf
+=======
           markdown_dir: './docs'
           markdown_file: 'README.md'
           output_dir: './docs'
+>>>>>>> main
       - name: Draft release
         uses: softprops/action-gh-release@v3
         with:
