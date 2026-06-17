@@ -13,9 +13,11 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - name: Convert Markdown to PDF
+        uses: your-username/markdown-to-pdf-action@v2
         with:
+<<<<<<< HEAD
           node-version: 24
           cache: npm
       - name: Install dependencies
@@ -29,8 +31,13 @@ jobs:
       - run: npm ci
       - name: Generate PDF
         run: npm run pdf
+=======
+          markdown_dir: './docs'
+          markdown_file: 'README.md'
+          output_dir: './docs'
+>>>>>>> main
       - name: Draft release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           body: ${{ github.event.pull_request.title }}
           draft: true
