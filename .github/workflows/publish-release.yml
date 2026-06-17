@@ -19,7 +19,7 @@ jobs:
           node-version: 24
           cache: npm
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends fontconfig fonts-noto-cjk fonts-ipafont-gothic
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends fontconfig fonts-noto-cjk fonts-ipafont-gothic texlive-xetex texlive-lang-cjk pandoc
       - name: Verify Japanese fonts
         run: |
           fc-list | grep -E "Noto Sans CJK JP|IPAexGothic|IPAGothic" || {
@@ -27,15 +27,7 @@ jobs:
             exit 1;
           }
       - run: npm ci
-      - name: Clear Puppeteer cache
-        run: rm -rf ~/.cache/puppeteer /home/runner/.cache/puppeteer
-      - name: Install Chromium
-        env:
-          PUPPETEER_CACHE_DIR: /home/runner/.cache/puppeteer
-        run: npx puppeteer browsers install chrome
       - name: Generate PDF
-        env:
-          PUPPETEER_CACHE_DIR: /home/runner/.cache/puppeteer
         run: npm run pdf
       - name: Draft release
         uses: softprops/action-gh-release@v2
