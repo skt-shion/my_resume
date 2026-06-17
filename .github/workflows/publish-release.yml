@@ -14,15 +14,11 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: baileyjm02/markdown-to-pdf@v1
         with:
-          node-version: 24
-          cache: npm
-      - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install libnss3 libasound2-dev
-      - run: npm install
-      - name: Generate PDF
-        run: npm run topdf
+          input_path: docs/README.md
+          output_dir: docs
+          build_html: false
       - name: Draft release
         uses: softprops/action-gh-release@v3
         with:
