@@ -14,16 +14,17 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v6
-      - uses: baileyjm02/markdown-to-pdf@v1
+      - name: Convert Markdown to PDF
+        uses: your-username/markdown-to-pdf-action@v2
         with:
-          input_path: docs/README.md
-          output_dir: docs
-          build_html: false
+          markdown_dir: './docs'
+          markdown_file: 'README.md'
+          output_dir: './docs'
       - name: Draft release
         uses: softprops/action-gh-release@v3
         with:
           body: ${{ github.event.pull_request.title }}
           draft: true
           fail_on_unmatched_files: true
-          files: README.pdf
+          files: docs/README.pdf
           name: Release ${{ github.ref }}
