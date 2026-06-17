@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends fontconfig fonts-noto-cjk fonts-ipafont-gothic texlive-xetex texlive-lang-cjk texlive-latex-recommended lmodern pandoc
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends fontconfig fonts-noto-cjk fonts-ipafont-gothic texlive-xetex texlive-lang-cjk texlive-lang-chinese texlive-lang-japanese texlive-lang-korean texlive-lang-other texlive-latex-recommended lmodern pandoc
       - name: Verify Japanese fonts
         run: |
           fc-list | grep -E "Noto Sans CJK JP|IPAexGothic|IPAGothic" || {
