@@ -27,6 +27,8 @@ jobs:
             exit 1;
           }
       - run: npm ci
+      - name: Clear Puppeteer cache
+        run: rm -rf ~/.cache/puppeteer /home/runner/.cache/puppeteer
       - name: Install Chromium
         run: npx puppeteer browsers install chrome
       - name: Generate PDF
