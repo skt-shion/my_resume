@@ -30,13 +30,12 @@ jobs:
       - name: Clear Puppeteer cache
         run: rm -rf ~/.cache/puppeteer /home/runner/.cache/puppeteer
       - name: Install Chromium
-        run: |
-          npx puppeteer browsers install chrome
-          BROWSER_PATH=$(find /home/runner/.cache/puppeteer -name "chrome-linux64" -type d | head -1)
-          if [ -n "$BROWSER_PATH" ]; then
-            echo "PUPPETEER_EXECUTABLE_PATH=${BROWSER_PATH}/chrome" >> $GITHUB_ENV
-          fi
+        env:
+          PUPPETEER_CACHE_DIR: /home/runner/.cache/puppeteer
+        run: npx puppeteer browsers install chrome
       - name: Generate PDF
+        env:
+          PUPPETEER_CACHE_DIR: /home/runner/.cache/puppeteer
         run: npm run pdf
       - name: Draft release
         uses: softprops/action-gh-release@v2
