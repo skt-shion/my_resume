@@ -8,7 +8,7 @@
   },
   "scripts": {
     "lint": "textlint .",
-    "pdf": "pandoc docs/README.md -o docs/README.pdf --pdf-engine=xelatex -V mainfont='Noto Sans CJK JP' -V CJKmainfont='Noto Sans CJK JP' -V margin-top=30mm -V margin-right=20mm -V margin-bottom=30mm -V margin-left=20mm"
+    "pdf": "pandoc docs/README.md -o docs/README.pdf --pdf-engine=xelatex -V mainfont='Noto Sans CJK JP' -V CJKmainfont='Noto Sans CJK JP' -V margin-top=30mm -V margin-right=20mm -V margin-bottom=30mm -V margin-left=20mm -H md-to-pdf/table.tex"
   },
   "engines": {
     "node": ">=24"
